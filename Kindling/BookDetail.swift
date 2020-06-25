@@ -19,19 +19,21 @@ struct BookDetail: View {
 				Text(self.Book.title!)
 					.font(.title)
 					.fontWeight(.semibold)
-					.lineLimit(2).padding(.bottom, -15)
-
+					.lineLimit(2)
+					.padding(.bottom, -15)
 				Button(action: {
 					var authorUrl = URL(string: self.Book.authorURL!)!
 					NSWorkspace.shared.open(authorUrl)
 				}) { Text(self.Book.author!) }
-					.buttonStyle(LinkButtonStyle()).padding(0)
-
+					.buttonStyle(LinkButtonStyle())
+					.padding(0)
 				Divider()
 				ForEach(self.Book.clippings!.filtered(by: self.store.searchQuery), id: \.self) { clipping in
 					ClippingView(clipping: clipping)
 				}
-			}.frame(minWidth: 300).padding()
+			}
+			.frame(minWidth: 300)
+			.padding()
 		}
 	}
 }

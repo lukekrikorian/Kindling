@@ -12,9 +12,11 @@ let context = (NSApplication.shared.delegate as! AppDelegate).persistentContaine
 var BookDescription = NSEntityDescription.entity(forEntityName: "Book", in: context)!
 
 func getBooks(withProperties: Bool) -> Books {
+	#if DEBUG
 	let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Book")
 	let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
 	try! context.execute(deleteRequest)
+	#endif
 
 	var req = Book.request()
 	req.includesPropertyValues = withProperties

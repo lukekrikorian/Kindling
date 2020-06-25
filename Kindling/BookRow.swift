@@ -38,7 +38,25 @@ struct BookRow: View {
 				}
 			}
 			Spacer()
-		}.padding([.top, .bottom], 10)
+		}
+		.padding([.top, .bottom], 10)
+		.contextMenu {
+			Button(action: self.deleteBook) {
+				Text("Delete Book")
+					.foregroundColor(Color.red)
+			}
+		}
+	}
+
+	func deleteBook() {
+		var fetchRequest = NSFetchRequest<Book>(entityName: "Book")
+		fetchRequest.predicate = NSPredicate(format: "id = %@", self.Book.id! as CVarArg)
+		do {
+			let books = try context.fetch(fetchRequest)
+			context.delete(books.first!)
+		} catch {
+			print(error)
+		}
 	}
 }
 

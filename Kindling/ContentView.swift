@@ -19,9 +19,9 @@ struct ContentView: View {
 	}
 
 	var body: some View {
-		return NavigationView {
+		NavigationView {
 			NavigationMaster(books: books.reversed())
-			if self.store.selectedBook != nil {
+			if self.store.selectedBook != nil && self.store.selectedBook?.title != nil {
 				BookDetail(Book: self.store.selectedBook!)
 			}
 		}.onAppear(perform: self.pickFirstSelection)

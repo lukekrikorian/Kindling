@@ -17,7 +17,10 @@ struct NavigationMaster: View {
 			ForEach(filtered, id: \.id) { book in
 				BookRow(Book: book).tag(book)
 			}
-		}.listStyle(SidebarListStyle()).id(UUID(uuidString: self.store.searchQuery)).frame(minWidth: 275)
+		}
+		.listStyle(SidebarListStyle())
+		.id(UUID(uuidString: self.store.searchQuery))
+		.frame(minWidth: 275)
 	}
 }
 
