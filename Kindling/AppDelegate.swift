@@ -11,6 +11,19 @@ import SwiftUI
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
+	@IBAction func MenuActionUndo(_ sender: Any) {
+		context.undo()
+	}
+
+	@IBAction func MenuActionRedo(_ sender: Any) {
+		context.redo()
+	}
+
+	@IBAction func MenuActionSave(_ sender: Any) {
+		do { try context.save() }
+		catch { print("Failed to save!") }
+	}
+
 	lazy var persistentContainer: NSPersistentContainer = {
 		let container = NSPersistentContainer(name: "Book")
 		container.loadPersistentStores(completionHandler: { _, error in
@@ -21,8 +34,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		return container
 	}()
 
-	func applicationDidFinishLaunching(_ obj: Notification) {}
-	func applicationWillTerminate(_ obj: Notification) {}
+	func applicationDidFinishLaunching(_ obj: Notification) {
+		context.undoManager = CoreData.UndoManager()
+	}
+
+	func applicationWillTerminate(_ obj: Notification) {
+		try! context.save()
+	}
 }
 
 var store = Store()
@@ -32,16 +50,23 @@ class WindowController: NSWindowController {
 		let context = (NSApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 		var contentView = ContentView().environment(\.managedObjectContext, context).environmentObject(store)
 		window?.contentView = NSHostingView(rootView: contentView)
+		var frame = window?.frame
+		frame?.size = NSMakeSize(850, 550)
+		window?.setFrame(frame!, display: false)
 		window?.makeKeyAndOrderFront(nil)
 	}
 }
 
 class SearchFieldHandler: NSSearchField {
+	func updateStore() {
+		store.searchQuery = stringValue.trimmingCharacters(in: .whitespaces)
+	}
+
 	override func textDidChange(_ notification: Notification) {
-		store.searchQuery = self.stringValue
+		updateStore()
 	}
 
 	override func textDidEndEditing(_ notification: Notification) {
-		store.searchQuery = self.stringValue
+		updateStore()
 	}
 }

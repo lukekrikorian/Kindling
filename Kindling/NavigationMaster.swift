@@ -19,7 +19,7 @@ struct NavigationMaster: View {
 			}
 		}
 		.listStyle(SidebarListStyle())
-		.id(UUID(uuidString: self.store.searchQuery))
+		.id(self.store.searchQuery)
 		.frame(minWidth: 275)
 	}
 }

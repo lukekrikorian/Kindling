@@ -32,6 +32,10 @@ struct ClippingView: View {
 				Button(action: { /* self.showModal(clipping) */ }) {
 					Text("Edit")
 				}
+				Button(action: self.deleteClipping) {
+					Text("Delete Highlight")
+						.foregroundColor(Color.red)
+				}
 			}
 	}
 
@@ -43,6 +47,13 @@ struct ClippingView: View {
 		}
 		self.pasteboard.clearContents()
 		self.pasteboard.writeObjects([clip as NSString])
+	}
+	
+	func deleteClipping() {
+		var book = self.store.selectedBook!
+		var index = book.clippings!.index(of: self.clipping)
+		book.clippings!.remove(at: index)
+		try! context.save()
 	}
 }
 

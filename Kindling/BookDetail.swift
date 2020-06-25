@@ -19,7 +19,7 @@ struct BookDetail: View {
 				Text(self.Book.title!)
 					.font(.title)
 					.fontWeight(.semibold)
-					.lineLimit(2)
+					.lineLimit(nil)
 					.padding(.bottom, -15)
 				Button(action: {
 					var authorUrl = URL(string: self.Book.authorURL!)!

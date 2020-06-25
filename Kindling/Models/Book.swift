@@ -24,7 +24,10 @@ extension Books {
 extension Book {
 	@nonobjc public class func request() -> NSFetchRequest<Book> {
 		var req = NSFetchRequest<Book>(entityName: "Book")
-		req.sortDescriptors = []
+		req.sortDescriptors = [
+			NSSortDescriptor(keyPath: \Book.author, ascending: false),
+			NSSortDescriptor(keyPath: \Book.title, ascending: false)
+		]
 		return req
 	}
 

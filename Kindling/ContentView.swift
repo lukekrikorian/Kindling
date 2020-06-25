@@ -12,19 +12,20 @@ struct ContentView: View {
 	@EnvironmentObject var store: Store
 	@FetchRequest(fetchRequest: Book.request()) var books: FetchedResults<Book>
 
-	func pickFirstSelection() {
-		if books.count > 0 {
-			store.selectedBook = books[0]
-		}
-	}
-
 	var body: some View {
 		NavigationView {
 			NavigationMaster(books: books.reversed())
 			if self.store.selectedBook != nil && self.store.selectedBook?.title != nil {
 				BookDetail(Book: self.store.selectedBook!)
+			} else {
+				Text("No selection")
+					.foregroundColor(Color.secondary)
+					.font(.system(size: 20))
+					.fontWeight(.bold)
+					.opacity(0.5)
+					.frame(minWidth: 0, maxWidth: .infinity,minHeight: 0, maxHeight: .infinity)
 			}
-		}.onAppear(perform: self.pickFirstSelection)
+		}
 	}
 }
 
