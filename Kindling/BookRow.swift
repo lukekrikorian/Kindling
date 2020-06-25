@@ -10,11 +10,11 @@ import SwiftUI
 import URLImage
 
 struct BookRow: View {
-    var Book: Book
-    var body: some View {
-        HStack {
-            VStack (alignment: .leading) {
-				HStack (alignment: .center){
+	var Book: Book
+	var body: some View {
+		HStack {
+			VStack(alignment: .leading) {
+				HStack(alignment: .center) {
 					URLImage(URL(string: self.Book.coverURL!)!, placeholder: { _ in
 						Color.clear
 							.frame(width: 70, height: 100)
@@ -26,24 +26,24 @@ struct BookRow: View {
 							.saturation(0.9)
 							.frame(width: 45)
 					}
-					VStack (alignment: .leading) {
+					VStack(alignment: .leading) {
 						Text(Book.title!.components(separatedBy: ":")[0])
 							.font(.subheadline)
 							.fontWeight(.semibold)
 							.lineLimit(2)
 						Text(Book.author!)
 							.font(.subheadline)
-						.lineLimit(1)
+							.lineLimit(1)
 					}
 				}
-            }
-            Spacer()
-        }.padding([.top, .bottom], 10)
-    }
+			}
+			Spacer()
+		}.padding([.top, .bottom], 10)
+	}
 }
 
-//struct BookRow_Previews: PreviewProvider {
+// struct BookRow_Previews: PreviewProvider {
 //    static var previews: some View {
 //        BookRow(book: nil).frame(maxWidth: 300)
 //    }
-//}
+// }

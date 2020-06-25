@@ -9,10 +9,10 @@
 import SwiftUI
 
 class Store: ObservableObject {
-    @Published var searchQuery: String = ""
-    
-    @Published var selectedBook: Book?
-    @Published var selectedClipping: String?
-    
-    init() { GenerateBooks() }
+	@Published var searchQuery: String = ""
+
+	@Published var selectedBook: Book?
+	@Published var selectedClipping: String?
+
+	init() { GenerateBooks() }
 }

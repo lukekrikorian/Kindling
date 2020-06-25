@@ -15,19 +15,19 @@ func getBooks(withProperties: Bool) -> Books {
 	let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Book")
 	let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
 	try! context.execute(deleteRequest)
-	
-    var req = Book.request()
-    req.includesPropertyValues = withProperties
-    return try! context.fetch(req) ?? []
+
+	var req = Book.request()
+	req.includesPropertyValues = withProperties
+	return try! context.fetch(req) ?? []
 }
 
 func GenerateBooks() {
-    var books = getBooks(withProperties: false)
+	var books = getBooks(withProperties: false)
 	var url = URL(string: "")
-	
-    if (books.count < 1) {
+
+	if books.count < 1 {
 		#if DEBUG
-		url = URL.init(fileURLWithPath: "/Users/luke/clippings.txt")
+		url = URL(fileURLWithPath: "/Users/luke/clippings.txt")
 		#else
 		var dialog = NSOpenPanel()
 
@@ -41,7 +41,7 @@ func GenerateBooks() {
 		var textContents: String = try! String(contentsOf: url!)
 		books = getBooks(withProperties: true)
 		ParseTextClippings(from: textContents, books)
-    }
+	}
 }
 
 struct iTunesBook: Decodable {
@@ -60,26 +60,26 @@ struct SearchResults: Decodable {
 
 func ParseClipping(clipping input: String) -> (String, String, String) {
 	var parts = input.regexpReplace(#"(\n|\r|\t|\|)"#, with: "\n")
-						.components(separatedBy: "\n")
-						.filter({ $0 != "" })
-						.map({ $0.trimmingCharacters(in: .whitespaces) })
-	
-	var title  = parts[0].regexpRemove(#"\(.+$"#)
+		.components(separatedBy: "\n")
+		.filter { $0 != "" }
+		.map { $0.trimmingCharacters(in: .whitespaces) }
+
+	var title = parts[0].regexpRemove(#"\(.+$"#)
 	var author = parts[0].regexpRemove(#"(^.+\(|\))"#)
-	var body   = parts.last!.removeFootnotes()
-	
+	var body = parts.last!.removeFootnotes()
+
 	return (title, author, body)
 }
 
 func ParseTextClippings(from text: String, _ alreadyGenerated: Books) {
-    var books = alreadyGenerated
-    var clippings = text.components(separatedBy: "==========")
-    clippings.popLast()
-	
+	var books = alreadyGenerated
+	var clippings = text.components(separatedBy: "==========")
+	clippings.popLast()
+
 	for var clip in clippings {
 		var (title, author, body) = ParseClipping(clipping: clip)
 		var alreadyGenerated = false
-	
+
 		for var (i, generatedBook) in books.enumerated() {
 			if generatedBook.title == title {
 				books[i].clippings!.append(body)
@@ -87,7 +87,7 @@ func ParseTextClippings(from text: String, _ alreadyGenerated: Books) {
 				break
 			}
 		}
-	
+
 		if !alreadyGenerated {
 			var book = GetiTunesBook(title)
 			var newBook = Book(context: context)
@@ -104,15 +104,15 @@ func ParseTextClippings(from text: String, _ alreadyGenerated: Books) {
 
 func GetiTunesBook(_ title: String) -> iTunesBook {
 	var URLSafeTitle = title.components(separatedBy: ":").first!
-							.components(separatedBy: " ")
-							.map({ $0.regexpRemove(#"[^\w]"#) })
-							.joined(separator: "+")
-	
+		.components(separatedBy: " ")
+		.map { $0.regexpRemove(#"[^\w]"#) }
+		.joined(separator: "+")
+
 	var searchURL = URL(string: "https://itunes.apple.com/search?term=\(URLSafeTitle)&entity=ebook")!
 	let request = URLRequest(url: searchURL)
-	
+
 	let (data, _, _) = URLSession.shared.synchronousTask(request)
 	var searchResults = try! JSONDecoder().decode(SearchResults.self, from: data!)
-	
+
 	return searchResults.results[0]
 }

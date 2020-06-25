@@ -8,29 +8,28 @@
 
 import SwiftUI
 
-
 struct ContentView: View {
-    @EnvironmentObject var store: Store
-    @FetchRequest(fetchRequest: Book.request()) var books: FetchedResults<Book>
-    
-    func pickFirstSelection() {
-        if books.count > 0 {
-            self.store.selectedBook = books[0]
-        }
-    }
+	@EnvironmentObject var store: Store
+	@FetchRequest(fetchRequest: Book.request()) var books: FetchedResults<Book>
 
-    var body: some View {
-        return NavigationView {
-            NavigationMaster(books: books.reversed())
-            if (self.store.selectedBook != nil) {
-                BookDetail(Book: self.store.selectedBook!)
-            }
-        }.onAppear(perform: self.pickFirstSelection)
-    }
+	func pickFirstSelection() {
+		if books.count > 0 {
+			store.selectedBook = books[0]
+		}
+	}
+
+	var body: some View {
+		return NavigationView {
+			NavigationMaster(books: books.reversed())
+			if self.store.selectedBook != nil {
+				BookDetail(Book: self.store.selectedBook!)
+			}
+		}.onAppear(perform: self.pickFirstSelection)
+	}
 }
 
-//struct ContentView_Previews: PreviewProvider {
+// struct ContentView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        ContentView()
 //    }
-//}
+// }
