@@ -9,6 +9,8 @@
 import Cocoa
 import SwiftUI
 
+var store = Store()
+
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 	@IBAction func MenuActionUndo(_ sender: Any) {
@@ -22,6 +24,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	@IBAction func MenuActionSave(_ sender: Any) {
 		do { try context.save() }
 		catch { print("Failed to save!") }
+	}
+
+	@IBAction func MenuActionDelete(_ sender: Any) {
+		guard store.selectedBook != nil else { return }
+		store.selectedBook!.delete()
 	}
 
 	lazy var persistentContainer: NSPersistentContainer = {
@@ -42,8 +49,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		try! context.save()
 	}
 }
-
-var store = Store()
 
 class WindowController: NSWindowController {
 	override func windowDidLoad() {

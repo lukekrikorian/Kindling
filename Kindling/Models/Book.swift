@@ -37,6 +37,17 @@ extension Book {
 		req.includesPropertyValues = false
 		return req
 	}
+
+	@nonobjc public func delete() {
+		do {
+			let req = NSFetchRequest<Book>(entityName: "Book")
+			req.predicate = NSPredicate(format: "id = %@", self.id! as CVarArg)
+			let books = try context.fetch(req)
+			context.delete(books.first!)
+		} catch {
+			return
+		}
+	}
 }
 
 extension Clippings {
