@@ -21,6 +21,10 @@ extension Books {
 	}
 }
 
+public enum QuoteType {
+	case normal, citation
+}
+
 extension Book {
 	@nonobjc public class func request() -> NSFetchRequest<Book> {
 		var req = NSFetchRequest<Book>(entityName: "Book")
@@ -46,6 +50,15 @@ extension Book {
 			context.delete(books.first!)
 		} catch {
 			return
+		}
+	}
+	
+	@nonobjc public func selectedClippingCitation(_ type: QuoteType) -> String {
+		switch type {
+			case .citation:
+				return "\u{201c}\(store.selectedClipping!)\u{201d} \(self.author!), \(self.title!)"
+			case .normal:
+				return store.selectedClipping!
 		}
 	}
 }

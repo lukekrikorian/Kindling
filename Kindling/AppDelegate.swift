@@ -49,29 +49,3 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		try! context.save()
 	}
 }
-
-class WindowController: NSWindowController {
-	override func windowDidLoad() {
-		let context = (NSApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-		var contentView = ContentView().environment(\.managedObjectContext, context).environmentObject(store)
-		window?.contentView = NSHostingView(rootView: contentView)
-		var frame = window?.frame
-		frame?.size = NSMakeSize(850, 550)
-		window?.setFrame(frame!, display: false)
-		window?.makeKeyAndOrderFront(nil)
-	}
-}
-
-class SearchFieldHandler: NSSearchField {
-	func updateStore() {
-		store.searchQuery = stringValue.trimmingCharacters(in: .whitespaces)
-	}
-
-	override func textDidChange(_ notification: Notification) {
-		updateStore()
-	}
-
-	override func textDidEndEditing(_ notification: Notification) {
-		updateStore()
-	}
-}

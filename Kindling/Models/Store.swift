@@ -12,7 +12,15 @@ class Store: ObservableObject {
 	@Published var searchQuery: String = ""
 
 	@Published var selectedBook: Book?
-	@Published var selectedClipping: String?
+	@Published var selectedClipping: Clipping? {
+		willSet(selection) {
+			DispatchQueue.main.async {
+				var toolbar = NSApplication.shared.mainWindow!.toolbar!
+				var shareButton = toolbar.items.first(where: { $0.itemIdentifier == .shareButton })
+				shareButton?.isEnabled = (selection != nil)
+			}
+		}
+	}
 
 	init() { GenerateBooks() }
 }
