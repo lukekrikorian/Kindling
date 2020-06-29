@@ -28,7 +28,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 	@IBAction func MenuActionDelete(_ sender: Any) {
 		guard store.selectedBook != nil else { return }
-		store.selectedBook!.delete()
+		context.delete(store.selectedBook!)
 	}
 
 	lazy var persistentContainer: NSPersistentContainer = {

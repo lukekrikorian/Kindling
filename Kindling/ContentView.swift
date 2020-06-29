@@ -10,11 +10,10 @@ import SwiftUI
 
 struct ContentView: View {
 	@EnvironmentObject var store: Store
-	@FetchRequest(fetchRequest: Book.request()) var books: FetchedResults<Book>
 
 	var body: some View {
 		NavigationView {
-			NavigationMaster(books: books.reversed())
+			BookList()
 			if self.store.selectedBook != nil && self.store.selectedBook?.title != nil {
 				BookDetail(Book: self.store.selectedBook!)
 			} else {
@@ -23,14 +22,16 @@ struct ContentView: View {
 					.font(.system(size: 20))
 					.fontWeight(.bold)
 					.opacity(0.5)
-					.frame(minWidth: 0, maxWidth: .infinity,minHeight: 0, maxHeight: .infinity)
+					.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
 			}
 		}
 	}
 }
 
-// struct ContentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ContentView()
-//    }
-// }
+//struct ContentView_Previews: PreviewProvider {
+//	static var previews: some View {
+//		ContentView()
+//			.modifier(PreviewWrapper())
+//			.frame(width: 600)
+//	}
+//}

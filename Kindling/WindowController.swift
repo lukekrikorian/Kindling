@@ -11,18 +11,19 @@ import SwiftUI
 
 class WindowController: NSWindowController {
 	@IBAction func ToolbarActionShare(_ sender: NSButton) {
-		var citation = store.selectedBook?.selectedClippingCitation(.citation)
-		var ServicePicker = NSSharingServicePicker(items: [citation])
+		let citation = store.selectedBook?.selectedClippingCitation(.citation)
+		let ServicePicker = NSSharingServicePicker(items: [citation ?? ""])
 		ServicePicker.show(relativeTo: NSZeroRect, of: sender, preferredEdge: .minY)
 	}
 
 	override func windowDidLoad() {
 		let context = (NSApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-		var contentView = ContentView().environment(\.managedObjectContext, context).environmentObject(store)
+		let contentView = ContentView().environment(\.managedObjectContext, context).environmentObject(store)
 		window?.contentView = NSHostingView(rootView: contentView)
 		var frame = window?.frame
 		frame?.size = NSMakeSize(850, 550)
 		window?.setFrame(frame!, display: false)
 		window?.makeKeyAndOrderFront(nil)
+		DispatchQueue.main.async { GenerateBooks() }
 	}
 }

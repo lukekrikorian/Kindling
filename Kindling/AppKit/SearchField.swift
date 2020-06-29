@@ -11,7 +11,7 @@ import SwiftUI
 struct SearchField: NSViewRepresentable {
 	@Binding var text: String
 	func makeNSView(context: Context) -> NSSearchField {
-		var field = NSSearchField()
+		let field = NSSearchField()
 		field.placeholderString = "Search Highlights"
 		field.delegate = context.coordinator
 		return field

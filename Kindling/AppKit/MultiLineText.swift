@@ -16,8 +16,8 @@ struct MultiLineText: NSViewRepresentable {
 	var editable: Bool = true
 	var textView = NSTextView()
 	func makeNSView(context: Context) -> NSScrollView {
-		var scrollViewSize = NSRect(origin: .zero, size: CGSize(width: x, height: y))
-		var scrollView = NSScrollView(frame: scrollViewSize)
+		let scrollViewSize = NSRect(origin: .zero, size: CGSize(width: x, height: y))
+		let scrollView = NSScrollView(frame: scrollViewSize)
 		scrollView.frame = scrollViewSize
 		scrollView.hasVerticalScroller = scrollable
 		scrollView.hasHorizontalScroller = false

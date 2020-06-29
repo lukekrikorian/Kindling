@@ -1,5 +1,5 @@
 //
-//  ClippingView.swift
+//  Clipping.swift
 //  Kindling
 //
 //  Created by Luke Krikorian on 2020-05-19.
@@ -8,21 +8,19 @@
 
 import SwiftUI
 
-
-
 struct ClippingView: View {
 	@EnvironmentObject var store: Store
 	var clipping: Clipping
 	let pasteboard = NSPasteboard.general
 
 	var body: some View {
-		var isSelected = self.store.selectedClipping == self.clipping
+		let isSelected = self.store.selectedClipping == self.clipping
 		return HStack {
 			Text(clipping.withLeadingCapital())
 				.lineLimit(nil)
 				.foregroundColor(isSelected ? Color.white : Color.primary)
-				.padding(EdgeInsets(top: 6, leading: 10, bottom: 6, trailing: 10))
-				.font(.custom("Charter", size: 17))
+				.padding(EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15))
+				.font(.custom("Charter", size: 18))
 				.contextMenu {
 					Button(action: { self.copyQuote(.normal) }) {
 						Text("Copy Quote")
@@ -34,7 +32,8 @@ struct ClippingView: View {
 						Text("Delete Highlight")
 							.foregroundColor(Color.red)
 					}
-				}.onTapGesture {
+				}
+				.onTapGesture {
 					self.store.selectedClipping = isSelected ? nil : self.clipping
 				}
 			Spacer()
@@ -42,20 +41,22 @@ struct ClippingView: View {
 	}
 
 	func copyQuote(_ type: QuoteType) {
-		var clip = store.selectedBook!.selectedClippingCitation(type)
+		let clip = self.store.selectedBook!.selectedClippingCitation(type)
 		self.pasteboard.clearContents()
 		self.pasteboard.writeObjects([clip as NSString])
 	}
 
 	func deleteClipping() {
-		var book = self.store.selectedBook!
-		var index = book.clippings!.index(of: self.clipping)
+		let book = self.store.selectedBook!
+		let index = book.clippings!.index(of: self.clipping)
 		book.clippings!.remove(at: index)
 	}
 }
 
 struct ClippingView_Previews: PreviewProvider {
 	static var previews: some View {
-		ClippingView(clipping: "Hello there!")
+		ClippingView(clipping: "It has resolved personal worth into exchange value, and in place of the numberless indefeasible chartered freedoms, has set up that single, unconscionable freedom—Free Trade. In one word, for exploitation, veiled by religious and political illusions, it has substituted naked, shameless, direct, brutal exploitation.")
+			.frame(width: 500)
+			.environmentObject(Store())
 	}
 }
