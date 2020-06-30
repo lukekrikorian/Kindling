@@ -9,7 +9,8 @@
 import Cocoa
 
 extension NSToolbarItem.Identifier {
-	static let shareButton = NSToolbarItem.Identifier(rawValue: "ShareButton")
+	static let searchField = NSToolbarItem.Identifier(rawValue: "Search Field")
+	static let shareButton = NSToolbarItem.Identifier(rawValue: "Share Button")
 }
 
 class SearchFieldController: NSSearchField {

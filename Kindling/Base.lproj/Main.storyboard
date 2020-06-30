@@ -196,26 +196,26 @@ CA
                         <toolbar key="toolbar" implicitIdentifier="DDF576FE-3BCC-4F09-A8B3-346D9835197F" displayMode="iconOnly" sizeMode="regular" id="dFT-mN-Q3L">
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="WrI-qC-cAN"/>
-                                <toolbarItem implicitItemIdentifier="06BBDF56-32FA-475D-9E0A-7153924C5DAD" label="Highlight Search" paletteLabel="Highlight Search" sizingBehavior="auto" id="CWE-TW-1g3">
+                                <toolbarItem implicitItemIdentifier="06BBDF56-32FA-475D-9E0A-7153924C5DAD" explicitItemIdentifier="Search Field" label="Search" paletteLabel="Search" sizingBehavior="auto" id="CWE-TW-1g3">
                                     <nil key="toolTip"/>
                                     <searchField key="view" wantsLayer="YES" verticalHuggingPriority="750" textCompletion="NO" id="4ir-b3-dVg" customClass="SearchFieldController" customModule="Kindling" customModuleProvider="target">
-                                        <rect key="frame" x="13" y="14" width="70" height="22"/>
+                                        <rect key="frame" x="0.0" y="14" width="70" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="JRT-R7-sUX">
-                                            <font key="font" metaFont="system"/>
+                                            <font key="font" metaFont="label" size="13"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </searchFieldCell>
                                     </searchField>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="4A2D7BB6-9341-4C19-967C-CE0AD540A0DF" explicitItemIdentifier="ShareButton" label="Share" paletteLabel="Share" image="NSShareTemplate" sizingBehavior="auto" id="Hyb-T0-ROQ" userLabel="Share Button">
+                                <toolbarItem implicitItemIdentifier="4A2D7BB6-9341-4C19-967C-CE0AD540A0DF" explicitItemIdentifier="Share Button" label="Share" paletteLabel="Share" image="NSShareTemplate" sizingBehavior="auto" id="Hyb-T0-ROQ" userLabel="Share Button">
                                     <nil key="toolTip"/>
                                     <button key="view" identifier="Share" verticalHuggingPriority="750" id="ESm-RO-RP7">
                                         <rect key="frame" x="3" y="14" width="33" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSShareTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" enabled="NO" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="sUR-0v-NMe">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
+                                            <font key="font" metaFont="label" size="13"/>
                                         </buttonCell>
                                         <connections>
                                             <action selector="ToolbarActionShare:" target="loX-y6-9Ye" id="nEZ-1F-wSC"/>
@@ -229,7 +229,7 @@ CA
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSRefreshTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="xXE-iG-ydy">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="system"/>
+                                            <font key="font" metaFont="label" size="13"/>
                                         </buttonCell>
                                     </button>
                                 </toolbarItem>

@@ -24,17 +24,6 @@ extension NSManagedObjectContext {
 	}
 }
 
-extension Book {
-	func selectedClippingCitation(_ type: QuoteType) -> String {
-		switch type {
-			case .citation:
-				return "\u{201c}\(store.selectedClipping!)\u{201d} \(self.author!), \(self.title!)"
-			case .normal:
-				return store.selectedClipping!
-		}
-	}
-}
-
 extension Clippings {
 	func index(of clipping: Clipping) -> Int {
 		return self.firstIndex(of: clipping) ?? -1

@@ -41,7 +41,7 @@ struct ClippingView: View {
 	}
 
 	func copyQuote(_ type: QuoteType) {
-		let clip = self.store.selectedBook!.selectedClippingCitation(type)
+		let clip = self.store.selectedClippingFormat(type)
 		self.pasteboard.clearContents()
 		self.pasteboard.writeObjects([clip as NSString])
 	}
