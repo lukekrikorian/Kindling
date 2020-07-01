@@ -25,25 +25,29 @@ extension NSManagedObjectContext {
 }
 
 extension Clippings {
-	func index(of clipping: Clipping) -> Int {
-		return self.firstIndex(of: clipping) ?? -1
+	func containsQuery(_ query: String) -> Bool {
+		for clipping in self {
+			if clipping.containsQuery(query) {
+				return true
+			}
+		}
+		return false
 	}
-
-	func contains(_ query: String) -> Bool {
-		return self.contains(where: { clipping in
-			clipping.range(of: "(^|[^A-Za-z])\(query)($|[^A-Za-z])", options: [.caseInsensitive, .regularExpression]) != nil
-        })
-	}
-
-	func filtered(by query: String) -> Clippings {
+	
+	func filteredBy(_ query: String) -> Clippings {
 		if query.count < 1 {
 			return self
 		}
-		return self.filter { $0.contains(query) }
+		return self.filter { $0.containsQuery(query) }
 	}
 }
 
 extension Clipping {
+	func containsQuery(_ query: String) -> Bool {
+		guard query.count > 0 else { return true }
+		return self.range(of: "(^|[^A-Za-z])\(query)($|[^A-Za-z])", options: [.caseInsensitive, .regularExpression]) != nil
+	}
+	
 	func withLeadingCapital() -> String {
 		var str = self
 		return str.remove(at: str.startIndex).uppercased() + str

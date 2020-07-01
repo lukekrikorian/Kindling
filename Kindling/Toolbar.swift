@@ -19,9 +19,11 @@ class SearchFieldController: NSSearchField {
 	}
 
 	override func textDidChange(_ notification: Notification) {
-		updateSearchQuery()
+		if stringValue == "" {
+			updateSearchQuery()
+		}
 	}
-
+	
 	override func textDidEndEditing(_ notification: Notification) {
 		updateSearchQuery()
 	}

@@ -14,13 +14,17 @@ struct BookDetail: View {
 	@EnvironmentObject var store: Store
 	var Book: Book
 	var body: some View {
-		let clippings = self.Book.clippings!.filtered(by: self.store.searchQuery)
+		let clippings = self.Book.clippings!.filteredBy(self.store.searchQuery ?? "")
 		return ScrollView {
-			VStack(alignment: .leading) {
-				BookHeader(book: Book)
-				ForEach(clippings, id: \.self) { clipping in
-					ClippingView(clipping: clipping)
-				}
+			HStack {
+				Spacer()
+				VStack(alignment: .leading) {
+					BookHeader(book: Book)
+					ForEach(clippings, id: \.self) { clipping in
+						ClippingView(clipping: clipping)
+					}
+				}.frame(maxWidth: 700)
+				Spacer()
 			}
 		}
 		.frame(minWidth: 300)

@@ -48,7 +48,7 @@ struct ClippingView: View {
 
 	func deleteClipping() {
 		let book = self.store.selectedBook!
-		let index = book.clippings!.index(of: self.clipping)
+		guard let index = book.clippings!.firstIndex(of: self.clipping) else { return }
 		book.clippings!.remove(at: index)
 	}
 }

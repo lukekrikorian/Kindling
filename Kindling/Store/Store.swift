@@ -9,9 +9,15 @@
 import SwiftUI
 
 class Store: ObservableObject {
-	@Published var searchQuery: String = "" {
-		willSet {
-			self.selectedClipping = nil
+	@Published var listSelection: Book? {
+		willSet(book) {
+			self.selectedBook = book
+		}
+	}
+	
+	@Published var searchQuery: String? {
+		willSet(query) {
+			self.selectedBook = nil
 		}
 	}
 
@@ -26,7 +32,10 @@ class Store: ObservableObject {
 			self.validateShareButtons()
 		}
 	}
+}
 
+
+extension Store {
 	private func validateShareButtons() {
 		DispatchQueue.main.async {
 			let shouldEnable = self.selectedClipping != nil

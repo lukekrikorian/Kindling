@@ -26,13 +26,6 @@ struct BookRow: View {
 			}
 			Spacer()
 		}
-		.contextMenu {
-			Button(action: {
-				context.delete(self.Book)
-			}) {
-				Text("Delete Book").foregroundColor(Color.red)
-			}
-		}
 	}
 }
 
