@@ -11,8 +11,8 @@ import SwiftUI
 
 class WindowController: NSWindowController {
 	@IBAction func ToolbarActionShare(_ sender: NSButton) {
-		let citation = store.selectedClippingFormat(.citation)
-		let ServicePicker = NSSharingServicePicker(items: [citation])
+		let citation = store.selectedClipping?.as(.citation, from: store.selectedBook)
+		let ServicePicker = NSSharingServicePicker(items: [citation ?? "Nothing to share"])
 		ServicePicker.show(relativeTo: NSZeroRect, of: sender, preferredEdge: .minY)
 	}
 

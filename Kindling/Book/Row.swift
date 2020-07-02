@@ -11,16 +11,16 @@ import URLImage
 
 struct BookRow: View {
 	@EnvironmentObject var store: Store
-	var Book: Book
+	var book: Book
 	var body: some View {
 		HStack(alignment: .center) {
-			BookRowImage(Book: Book)
+			BookRowImage(book: book)
 			VStack(alignment: .leading) {
-				Text(Book.title!.components(separatedBy: ":")[0])
+				Text(book.title!.components(separatedBy: ":")[0])
 					.font(.subheadline)
 					.fontWeight(.semibold)
 					.lineLimit(2)
-				Text(Book.author!)
+				Text(book.author!)
 					.font(.subheadline)
 					.lineLimit(1)
 			}
@@ -31,7 +31,7 @@ struct BookRow: View {
 
 struct BookRow_Previews: PreviewProvider {
 	static var previews: some View {
-		BookRow(Book: PreviewContext.book)
+		BookRow(book: PreviewContext.book)
 			.modifier(PreviewWrapper())
 			.frame(width: 300)
 	}

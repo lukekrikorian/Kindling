@@ -12,7 +12,7 @@ typealias Clipping = String
 typealias Clippings = [Clipping]
 
 public enum QuoteType {
-	case normal, citation
+	case plain, citation
 }
 
 extension NSManagedObjectContext {
@@ -33,7 +33,7 @@ extension Clippings {
 		}
 		return false
 	}
-	
+
 	func filteredBy(_ query: String) -> Clippings {
 		if query.count < 1 {
 			return self
@@ -47,7 +47,7 @@ extension Clipping {
 		guard query.count > 0 else { return true }
 		return self.range(of: "(^|[^A-Za-z])\(query)($|[^A-Za-z])", options: [.caseInsensitive, .regularExpression]) != nil
 	}
-	
+
 	func withLeadingCapital() -> String {
 		var str = self
 		return str.remove(at: str.startIndex).uppercased() + str
@@ -62,6 +62,16 @@ extension Clipping {
 			str = str.replacingCharacters(in: match, with: "") as NSString
 		}
 		return str as String
+	}
+
+	func `as`(_ type: QuoteType, from book: Book? = nil) -> String {
+		let clipping = self.withLeadingCapital()
+		switch type {
+			case .citation:
+				return "\u{201c}\(clipping)\u{201d} \(book?.author ?? "No Author"), \(book?.title ?? "No Title")"
+			case .plain:
+				return clipping
+		}
 	}
 }
 

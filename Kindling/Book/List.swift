@@ -14,19 +14,17 @@ struct BookList: View {
 		NSSortDescriptor(keyPath: \Book.author, ascending: true),
 		NSSortDescriptor(keyPath: \Book.title, ascending: false)
 	]) var Books: FetchedResults<Book>
+
 	var filteredBooks: [Book] {
 		return Books.filter { $0.clippings!.containsQuery(store.searchQuery ?? "") }
 	}
-	
+
 	var body: some View {
 		return List(selection: self.$store.listSelection) {
 			ForEach(self.filteredBooks, id: \.id) { book in
-				BookRow(Book: book)
+				BookRow(book: book)
 					.contextMenu {
-						Button(action: { context.delete(book) }) {
-							Text("Delete Book")
-								.foregroundColor(Color.red)
-						}
+						RowContextMenu(book: book)
 					}
 					.tag(book)
 			}
@@ -35,6 +33,18 @@ struct BookList: View {
 		.id(self.filteredBooks)
 		.listStyle(SidebarListStyle())
 		.frame(minWidth: 275)
+	}
+}
+
+struct RowContextMenu: View {
+	var book: Book
+	var body: some View {
+		Button(action: {
+			context.delete(self.book)
+		}) {
+			Text("Delete Book")
+				.foregroundColor(Color.red)
+		}
 	}
 }
 

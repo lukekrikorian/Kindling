@@ -14,7 +14,7 @@ class Store: ObservableObject {
 			self.selectedBook = book
 		}
 	}
-	
+
 	@Published var searchQuery: String? {
 		willSet(query) {
 			self.selectedBook = nil
@@ -34,30 +34,18 @@ class Store: ObservableObject {
 	}
 }
 
-
 extension Store {
 	private func validateShareButtons() {
 		DispatchQueue.main.async {
 			let shouldEnable = self.selectedClipping != nil
-			
+
 			let toolbar = NSApplication.shared.mainWindow?.toolbar
-			let toolbarItem = toolbar!.items.first(where: {
+			let toolbarItem = toolbar?.items.first(where: {
 				$0.itemIdentifier == .shareButton
 			})
 			toolbarItem?.isEnabled = shouldEnable
-			
-			TouchBarItems.ShareButton.isEnabled = shouldEnable
-		}
-	}
 
-	public func selectedClippingFormat(_ format: QuoteType) -> String {
-		let book = self.selectedBook!
-		let clipping = self.selectedClipping!.withLeadingCapital()
-		switch format {
-			case .citation:
-				return "\u{201c}\(clipping)\u{201d} \(book.author!), \(book.title!)"
-			case .normal:
-				return clipping
+			TouchBarItems.ShareButton.isEnabled = shouldEnable
 		}
 	}
 }

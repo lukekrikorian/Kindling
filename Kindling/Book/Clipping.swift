@@ -11,10 +11,10 @@ import SwiftUI
 struct ClippingView: View {
 	@EnvironmentObject var store: Store
 	var clipping: Clipping
-	let pasteboard = NSPasteboard.general
 
 	var body: some View {
 		let isSelected = self.store.selectedClipping == self.clipping
+		let background = isSelected ? Color.blue.opacity(0.6) : Color.black.opacity(0.0001)
 		return HStack {
 			Text(clipping.withLeadingCapital())
 				.lineLimit(nil)
@@ -22,40 +22,51 @@ struct ClippingView: View {
 				.padding(EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15))
 				.font(.custom("Charter", size: 18))
 				.contextMenu {
-					Button(action: { self.copyQuote(.normal) }) {
-						Text("Copy Quote")
-					}
-					Button(action: { self.copyQuote(.citation) }) {
-						Text("Copy Quote with Citation")
-					}
-					Button(action: self.deleteClipping) {
-						Text("Delete Highlight")
-							.foregroundColor(Color.red)
-					}
-				}
-				.onTapGesture {
-					self.store.selectedClipping = isSelected ? nil : self.clipping
+					ClippingContextMenu(clipping: self.clipping)
 				}
 			Spacer()
-		}.background(isSelected ? Color.blue.opacity(0.6) : Color.clear)
+		}
+		.background(background)
+		.cornerRadius(3)
+		.onTapGesture {
+			self.store.selectedClipping = isSelected ? nil : self.clipping
+		}
+	}
+}
+
+struct ClippingContextMenu: View {
+	@EnvironmentObject var store: Store
+	var clipping: Clipping
+
+	var body: some View {
+		Group {
+			Button(action: { self.copyQuote(.plain) }) {
+				Text("Copy Quote")
+			}
+			Button(action: { self.copyQuote(.citation) }) {
+				Text("Copy Quote with Citation")
+			}
+			Button(action: self.deleteClipping) {
+				Text("Delete Highlight")
+			}
+		}
 	}
 
 	func copyQuote(_ type: QuoteType) {
-		let clip = self.store.selectedClippingFormat(type)
-		self.pasteboard.clearContents()
-		self.pasteboard.writeObjects([clip as NSString])
+		let clip = self.clipping.as(type, from: self.store.selectedBook)
+		pasteboard.clearContents()
+		pasteboard.writeObjects([clip as NSString])
 	}
 
 	func deleteClipping() {
-		let book = self.store.selectedBook!
-		guard let index = book.clippings!.firstIndex(of: self.clipping) else { return }
-		book.clippings!.remove(at: index)
+		guard let index = self.store.selectedBook!.clippings!.firstIndex(of: self.clipping) else { return }
+		self.store.selectedBook!.clippings?.remove(at: index)
 	}
 }
 
 struct ClippingView_Previews: PreviewProvider {
 	static var previews: some View {
-		ClippingView(clipping: "It has resolved personal worth into exchange value, and in place of the numberless indefeasible chartered freedoms, has set up that single, unconscionable freedom—Free Trade. In one word, for exploitation, veiled by religious and political illusions, it has substituted naked, shameless, direct, brutal exploitation.")
+		ClippingView(clipping: PreviewContext.book.clippings![0])
 			.frame(width: 500)
 			.environmentObject(Store())
 	}

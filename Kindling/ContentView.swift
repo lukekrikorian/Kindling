@@ -14,8 +14,8 @@ struct ContentView: View {
 	var body: some View {
 		NavigationView {
 			BookList()
-			if self.store.selectedBook != nil && self.store.selectedBook?.title != nil {
-				BookDetail(Book: self.store.selectedBook!)
+			if self.store.selectedBook != nil {
+				BookDetail(book: self.store.selectedBook!)
 			} else {
 				Text("No selection")
 					.foregroundColor(Color.secondary)
@@ -28,10 +28,10 @@ struct ContentView: View {
 	}
 }
 
-//struct ContentView_Previews: PreviewProvider {
+// struct ContentView_Previews: PreviewProvider {
 //	static var previews: some View {
 //		ContentView()
 //			.modifier(PreviewWrapper())
 //			.frame(width: 600)
 //	}
-//}
+// }

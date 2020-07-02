@@ -9,7 +9,7 @@
 import Cocoa
 
 extension NSTouchBarItem.Identifier {
-    static let share = NSTouchBarItem.Identifier(rawValue: "Share Button")
+	static let share = NSTouchBarItem.Identifier(rawValue: "Share Button")
 	static let search = NSTouchBarItem.Identifier(rawValue: "Search Button")
 }
 
@@ -25,14 +25,14 @@ extension WindowController: NSTouchBarDelegate {
 		touchBar.defaultItemIdentifiers = [.share, .search]
 		return touchBar
 	}
-	
+
 	@objc func TouchBarActionSearch() {
 		let searchField = self.window?.toolbar?.items.first(where: {
 			$0.itemIdentifier == .searchField
 		})?.view as? NSSearchField
 		searchField?.becomeFirstResponder()
 	}
-	
+
 	func touchBar(_ touchBar: NSTouchBar, makeItemForIdentifier identifier: NSTouchBarItem.Identifier) -> NSTouchBarItem? {
 		switch identifier {
 			case .share:
@@ -52,6 +52,6 @@ extension WindowController: NSTouchBarDelegate {
 
 extension WindowController: NSSharingServicePickerTouchBarItemDelegate {
 	func items(for pickerTouchBarItem: NSSharingServicePickerTouchBarItem) -> [Any] {
-		return [store.selectedClippingFormat(.citation)]
+		return [store.selectedClipping?.as(.citation, from: store.selectedBook) ?? "No Clipping"]
 	}
 }

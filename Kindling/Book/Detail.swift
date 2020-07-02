@@ -9,17 +9,19 @@
 import SwiftUI
 import URLImage
 
+let pasteboard = NSPasteboard.general
+
 struct BookDetail: View {
-	@FetchRequest(entity: BookDescription, sortDescriptors: []) var books: FetchedResults<Book>
 	@EnvironmentObject var store: Store
-	var Book: Book
+	@ObservedObject var book: Book
+
 	var body: some View {
-		let clippings = self.Book.clippings!.filteredBy(self.store.searchQuery ?? "")
+		let clippings = self.book.clippings!.filteredBy(self.store.searchQuery ?? "")
 		return ScrollView {
 			HStack {
 				Spacer()
 				VStack(alignment: .leading) {
-					BookHeader(book: Book)
+					BookHeader(book: book)
 					ForEach(clippings, id: \.self) { clipping in
 						ClippingView(clipping: clipping)
 					}
@@ -33,7 +35,7 @@ struct BookDetail: View {
 
 struct BookDetail_Previews: PreviewProvider {
 	static var previews: some View {
-		BookDetail(Book: PreviewContext.book)
+		BookDetail(book: PreviewContext.book)
 			.modifier(PreviewWrapper())
 			.frame(width: 500, height: 400)
 	}

@@ -10,9 +10,9 @@ import SwiftUI
 import URLImage
 
 struct BookRowImage: View {
-	var Book: Book
+	var book: Book
 	var body: some View {
-		URLImage(URL(string: self.Book.coverURL!)!, placeholder: { _ in
+		URLImage(URL(string: self.book.coverURL!)!, placeholder: { _ in
 			Color.clear
 				.frame(width: 70, height: 100)
 			}) { proxy in
@@ -28,6 +28,6 @@ struct BookRowImage: View {
 
 struct BookRowImage_Previews: PreviewProvider {
 	static var previews: some View {
-		BookRowImage(Book: PreviewContext.book)
+		BookRowImage(book: PreviewContext.book)
 	}
 }
