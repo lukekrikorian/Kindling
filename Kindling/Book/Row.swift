@@ -16,16 +16,16 @@ struct BookRow: View {
 		HStack(alignment: .center) {
 			BookRowImage(book: book)
 			VStack(alignment: .leading) {
-				Text(book.title!.components(separatedBy: ":")[0])
+				Text((book.title ?? "Unknown Work").components(separatedBy: ":")[0])
 					.font(.subheadline)
 					.fontWeight(.semibold)
 					.lineLimit(2)
-				Text(book.author!)
+				Text(book.author ?? "Unknown Author")
 					.font(.subheadline)
 					.lineLimit(1)
 			}
 			Spacer()
-		}
+		}.padding([.top, .bottom], 15)
 	}
 }
 

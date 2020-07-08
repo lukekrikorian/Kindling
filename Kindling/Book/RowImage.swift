@@ -11,18 +11,28 @@ import URLImage
 
 struct BookRowImage: View {
 	var book: Book
+	var url: URL? { URL(string: self.book.coverURL ?? "") }
+
 	var body: some View {
-		URLImage(URL(string: self.book.coverURL!)!, placeholder: { _ in
-			Color.clear
-				.frame(width: 70, height: 100)
-			}) { proxy in
-			proxy.image
-				.resizable()
-				.aspectRatio(contentMode: .fit)
-				.cornerRadius(3)
-				.saturation(0.9)
-				.frame(width: 45, height: 100)
+		let hasImage = !(self.url == nil)
+		return Group {
+			if hasImage {
+				URLImage(url!, placeholder: { _ in Color.clear }) {
+					$0.image
+						.resizable()
+						.aspectRatio(contentMode: .fit)
+				}
+			} else {
+				Image(nsImage: NSImage(named: NSImage.touchBarBookmarksTemplateName)!)
+					.resizable()
+					.aspectRatio(contentMode: .fit)
+					.frame(width: 20)
+			}
 		}
+		.saturation(hasImage ? 0.9 : 0.4)
+		.frame(width: 45)
+		.cornerRadius(3)
+		.background(hasImage ? Color.clear : Color.secondary.opacity(0.3))
 	}
 }
 

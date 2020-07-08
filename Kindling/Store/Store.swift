@@ -9,14 +9,8 @@
 import SwiftUI
 
 class Store: ObservableObject {
-	@Published var listSelection: Book? {
-		willSet(book) {
-			self.selectedBook = book
-		}
-	}
-
 	@Published var searchQuery: String? {
-		willSet(query) {
+		willSet {
 			self.selectedBook = nil
 		}
 	}
@@ -28,24 +22,20 @@ class Store: ObservableObject {
 	}
 
 	@Published var selectedClipping: Clipping? {
-		willSet {
-			self.validateShareButtons()
+		willSet(clipping) {
+			self.updateShareButtons(enabled: clipping != nil)
 		}
 	}
 }
 
 extension Store {
-	private func validateShareButtons() {
-		DispatchQueue.main.async {
-			let shouldEnable = self.selectedClipping != nil
+	private func updateShareButtons(enabled: Bool) {
+		let toolbar = NSApplication.shared.mainWindow?.toolbar
+		let toolbarItem = toolbar?.items.first(where: {
+			$0.itemIdentifier == .shareButton
+		})
 
-			let toolbar = NSApplication.shared.mainWindow?.toolbar
-			let toolbarItem = toolbar?.items.first(where: {
-				$0.itemIdentifier == .shareButton
-			})
-			toolbarItem?.isEnabled = shouldEnable
-
-			TouchBarItems.ShareButton.isEnabled = shouldEnable
-		}
+		toolbarItem?.isEnabled = enabled
+		TouchBarItems.ShareButton.isEnabled = enabled
 	}
 }

@@ -17,13 +17,15 @@ struct BookHeader: View {
 				.font(.title)
 				.fontWeight(.semibold)
 				.lineLimit(nil)
-
-			Button(action: self.openAuthorURL) {
+			if self.book.authorURL != nil {
+				Button(action: self.openAuthorURL) {
+					Text(self.book.author!).font(.subheadline)
+				}
+				.buttonStyle(LinkButtonStyle())
+				.padding(.top, -15)
+			} else {
 				Text(self.book.author!).font(.subheadline)
 			}
-			.buttonStyle(LinkButtonStyle())
-			.padding(.top, -15)
-
 			Divider()
 		}.padding([.leading, .top, .trailing])
 	}

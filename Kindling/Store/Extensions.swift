@@ -15,6 +15,13 @@ public enum QuoteType {
 	case plain, citation
 }
 
+extension NSTextField {
+	override open var focusRingType: NSFocusRingType {
+		get { .none }
+		set {}
+	}
+}
+
 extension NSManagedObjectContext {
 	func delete(book: Book) {
 		let req = NSFetchRequest<Book>(entityName: "Book")
@@ -49,6 +56,7 @@ extension Clipping {
 	}
 
 	func withLeadingCapital() -> String {
+		guard self.count > 0 else { return self }
 		var str = self
 		return str.remove(at: str.startIndex).uppercased() + str
 	}
@@ -82,6 +90,13 @@ extension String {
 
 	func regexpReplace(_ regexp: String, with: String) -> String {
 		return self.replacingOccurrences(of: regexp, with: with, options: .regularExpression)
+	}
+	
+	func searchSanitized() -> String {
+		return self.lowercased()
+			.components(separatedBy: ":")[0]
+			.trimmingCharacters(in: .whitespaces)
+			.regexpRemove(#"[^ \w]"#)
 	}
 }
 

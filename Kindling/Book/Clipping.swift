@@ -40,15 +40,9 @@ struct ClippingContextMenu: View {
 
 	var body: some View {
 		Group {
-			Button(action: { self.copyQuote(.plain) }) {
-				Text("Copy Quote")
-			}
-			Button(action: { self.copyQuote(.citation) }) {
-				Text("Copy Quote with Citation")
-			}
-			Button(action: self.deleteClipping) {
-				Text("Delete Highlight")
-			}
+			Button("Copy Quote", action: { self.copyQuote(.plain) })
+			Button("Copy Quote with Citation", action: { self.copyQuote(.citation) })
+			Button("Delete Highlight", action: self.deleteClipping)
 		}
 	}
 

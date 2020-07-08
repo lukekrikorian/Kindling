@@ -16,13 +16,13 @@ struct BookDetail: View {
 	@ObservedObject var book: Book
 
 	var body: some View {
-		let clippings = self.book.clippings!.filteredBy(self.store.searchQuery ?? "")
+		let clippings = self.book.clippings?.filteredBy(self.store.searchQuery ?? "")
 		return ScrollView {
 			HStack {
 				Spacer()
 				VStack(alignment: .leading) {
 					BookHeader(book: book)
-					ForEach(clippings, id: \.self) { clipping in
+					ForEach(clippings ?? [], id: \.self) { clipping in
 						ClippingView(clipping: clipping)
 					}
 				}.frame(maxWidth: 700)

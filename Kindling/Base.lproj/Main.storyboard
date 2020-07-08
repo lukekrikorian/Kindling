@@ -202,7 +202,7 @@ CA
                                         <rect key="frame" x="0.0" y="14" width="70" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="JRT-R7-sUX">
-                                            <font key="font" metaFont="label" size="13"/>
+                                            <font key="font" metaFont="system"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </searchFieldCell>
@@ -215,10 +215,10 @@ CA
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSShareTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" enabled="NO" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="sUR-0v-NMe">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="label" size="13"/>
+                                            <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <action selector="ToolbarActionShare:" target="loX-y6-9Ye" id="nEZ-1F-wSC"/>
+                                            <action selector="ToolbarActionShare:" target="loX-y6-9Ye" id="Cfn-es-sPW"/>
                                         </connections>
                                     </button>
                                 </toolbarItem>
@@ -229,8 +229,22 @@ CA
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSRefreshTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="xXE-iG-ydy">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="label" size="13"/>
+                                            <font key="font" metaFont="system"/>
                                         </buttonCell>
+                                    </button>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="630C2DF8-0D19-4817-97FA-B6C8061E474C" label="Add Highlight" paletteLabel="Add Highlight" image="NSAddTemplate" sizingBehavior="auto" id="lOF-xf-5go">
+                                    <nil key="toolTip"/>
+                                    <button key="view" verticalHuggingPriority="750" id="KHk-e2-yFW">
+                                        <rect key="frame" x="17" y="14" width="45" height="25"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSAddTemplate" imagePosition="only" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Ihy-mH-lVc">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="ToolbarActionAddClipping:" target="loX-y6-9Ye" id="OJg-4W-n37"/>
+                                        </connections>
                                     </button>
                                 </toolbarItem>
                             </allowedToolbarItems>
@@ -238,7 +252,7 @@ CA
                                 <toolbarItem reference="CWE-TW-1g3"/>
                                 <toolbarItem reference="WrI-qC-cAN"/>
                                 <toolbarItem reference="Hyb-T0-ROQ"/>
-                                <toolbarItem reference="WrU-Rm-Kq1"/>
+                                <toolbarItem reference="lOF-xf-5go"/>
                             </defaultToolbarItems>
                         </toolbar>
                     </window>
@@ -265,6 +279,7 @@ CA
         </scene>
     </scenes>
     <resources>
+        <image name="NSAddTemplate" width="11" height="11"/>
         <image name="NSRefreshTemplate" width="11" height="15"/>
         <image name="NSShareTemplate" width="11" height="16"/>
     </resources>

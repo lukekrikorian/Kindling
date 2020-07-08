@@ -13,6 +13,7 @@ var store = Store()
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
+
 	@IBAction func MenuActionUndo(_ sender: Any) {
 		context.undo()
 	}
@@ -45,7 +46,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		context.undoManager = CoreData.UndoManager()
 	}
 
-	func applicationWillTerminate(_ obj: Notification) {
-		try! context.save()
+	func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
+		print("Saving CoreData before termination")
+		do { try context.save() } catch { print(error) }
+		print("Terminating Application")
+		return .terminateNow
 	}
 }

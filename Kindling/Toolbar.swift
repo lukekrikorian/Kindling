@@ -7,10 +7,32 @@
 //
 
 import Cocoa
+import SwiftUI
 
 extension NSToolbarItem.Identifier {
 	static let searchField = NSToolbarItem.Identifier(rawValue: "Search Field")
 	static let shareButton = NSToolbarItem.Identifier(rawValue: "Share Button")
+}
+
+extension WindowController {
+	@IBAction func ToolbarActionAddClipping(_ sender: NSButton) {
+		self.clippingWindow = NSWindow(
+			contentRect: .zero,
+			styleMask: [.titled, .closable, .miniaturizable, .fullSizeContentView],
+			backing: .buffered,
+			defer: false)
+		let view = NewClipping(window: self.clippingWindow)
+
+		self.clippingWindow.contentView = NSHostingView(rootView: view)
+		self.clippingWindow.center()
+		self.clippingWindow.makeKeyAndOrderFront(nil)
+	}
+
+	@IBAction func ToolbarActionShare(_ sender: NSButton) {
+		let citation = store.selectedClipping?.as(.citation, from: store.selectedBook)
+		let ServicePicker = NSSharingServicePicker(items: [citation ?? "Nothing to share"])
+		ServicePicker.show(relativeTo: NSZeroRect, of: sender, preferredEdge: .minY)
+	}
 }
 
 class SearchFieldController: NSSearchField {
@@ -20,11 +42,11 @@ class SearchFieldController: NSSearchField {
 
 	override func textDidChange(_ notification: Notification) {
 		if stringValue == "" {
-			updateSearchQuery()
+			self.updateSearchQuery()
 		}
 	}
-	
+
 	override func textDidEndEditing(_ notification: Notification) {
-		updateSearchQuery()
+		self.updateSearchQuery()
 	}
 }

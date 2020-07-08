@@ -10,26 +10,29 @@ import SwiftUI
 
 struct MultiLineText: NSViewRepresentable {
 	@Binding var text: String
-	var x: Int = 100
-	var y: Int = 100
+	var fontSize: Int = 15
+	var width: Int = 100
+	var height: Int = 100
 	var scrollable: Bool = true
 	var editable: Bool = true
-	var textView = NSTextView()
+	let textView = NSTextView()
 	func makeNSView(context: Context) -> NSScrollView {
-		let scrollViewSize = NSRect(origin: .zero, size: CGSize(width: x, height: y))
+		let scrollViewSize = NSRect(origin: .zero, size: CGSize(width: width, height: height))
 		let scrollView = NSScrollView(frame: scrollViewSize)
 		scrollView.frame = scrollViewSize
 		scrollView.hasVerticalScroller = scrollable
 		scrollView.hasHorizontalScroller = false
 		scrollView.autohidesScrollers = true
+		scrollView.drawsBackground = false
+		scrollView.backgroundColor = NSColor.clear
 		scrollView.documentView = textView
-		scrollView.backgroundColor = NSColor.controlBackgroundColor
 		textView.frame = scrollView.frame
 		textView.isEditable = editable
 		textView.isSelectable = true
 		textView.isRichText = false
-		textView.font = NSFont(name: "Charter", size: 16 as CGFloat)!
-		textView.backgroundColor = NSColor.controlBackgroundColor
+		textView.font = NSFont.systemFont(ofSize: CGFloat(self.fontSize))
+		textView.backgroundColor = NSColor.clear
+		textView.drawsBackground = false
 		textView.delegate = context.coordinator
 		return scrollView
 	}
@@ -57,6 +60,6 @@ struct MultiLineText: NSViewRepresentable {
 
 struct MultiLineText_Previews: PreviewProvider {
 	static var previews: some View {
-		MultiLineText(text: Binding.constant("Lol!"), x: 100, y: 100)
+		MultiLineText(text: .constant("Lol!"), width: 100, height: 100).frame(width: 200, height: 300)
 	}
 }
