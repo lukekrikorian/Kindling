@@ -12,10 +12,9 @@ import URLImage
 struct BookRow: View {
 	@EnvironmentObject var store: Store
 	@ObservedObject var book: Book
-	var placeholderImage: Image
 	var body: some View {
 		HStack(alignment: .center) {
-			BookCover(book: book, placeholder: PreviewContext.image)
+			BookCover(book: book)
 			VStack(alignment: .leading) {
 				Text((book.title).components(separatedBy: ":")[0])
 					.font(.subheadline)
@@ -36,7 +35,7 @@ struct BookRow: View {
 
 struct BookRow_Previews: PreviewProvider {
 	static var previews: some View {
-		BookRow(book: PreviewContext.book, placeholderImage: PreviewContext.image)
+		BookRow(book: PreviewContext.book)
 			.modifier(PreviewWrapper())
 			.frame(width: 300)
 	}

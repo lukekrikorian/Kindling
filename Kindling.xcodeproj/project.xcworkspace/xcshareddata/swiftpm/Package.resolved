@@ -2,21 +2,30 @@
   "object": {
     "pins": [
       {
+        "package": "FetchImage",
+        "repositoryURL": "https://github.com/kean/FetchImage",
+        "state": {
+          "branch": "master",
+          "revision": "de0af7b5db1e6497950dd340e679d77721ba7bd4",
+          "version": null
+        }
+      },
+      {
+        "package": "Nuke",
+        "repositoryURL": "https://github.com/kean/Nuke.git",
+        "state": {
+          "branch": null,
+          "revision": "998588c80611e4fe9b71dd4323fa938ee62f4ff7",
+          "version": "9.1.1"
+        }
+      },
+      {
         "package": "TextView",
         "repositoryURL": "https://github.com/kenmueller/TextView",
         "state": {
           "branch": "master",
           "revision": "e9bf78313788c0bc0bc57a08edc8fa5c85a31a79",
           "version": null
-        }
-      },
-      {
-        "package": "URLImage",
-        "repositoryURL": "https://github.com/dmytro-anokhin/url-image.git",
-        "state": {
-          "branch": null,
-          "revision": "a48feef3ef91f573a5f55779502e07adb19943b8",
-          "version": "0.9.15"
         }
       }
     ]

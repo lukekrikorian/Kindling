@@ -18,12 +18,12 @@ struct BookHeader: View {
 		let hasAuthorLink = self.book.authorURL != nil
 		return VStack(alignment: .leading) {
 			HStack(alignment: .top) {
-				BookCover(book: book, placeholder: PreviewContext.image, width: self.imageWidth)
+				BookCover(book: book, width: self.imageWidth)
 				VStack (alignment: .leading) {
 					Text(book.title)
-						.font(.headline)
 						.fontWeight(.semibold)
 						.lineLimit(nil)
+						.font(.headline)
 
 					Text(book.author)
 						.font(.subheadline)

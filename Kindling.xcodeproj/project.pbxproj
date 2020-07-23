@@ -21,6 +21,8 @@
 		A324A56924BD07CE009B78A1 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = A324A56624BD07CE009B78A1 /* List.swift */; };
 		A324A56B24BD07EF009B78A1 /* ClippingForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = A324A56A24BD07EF009B78A1 /* ClippingForm.swift */; };
 		A324A56E24BD0F28009B78A1 /* TextView in Frameworks */ = {isa = PBXBuildFile; productRef = A324A56D24BD0F28009B78A1 /* TextView */; };
+		A3304B0324C6A0EC00F5B835 /* FetchImage in Frameworks */ = {isa = PBXBuildFile; productRef = A3304B0224C6A0EC00F5B835 /* FetchImage */; };
+		A3304B0424C6AABB00F5B835 /* Clipping.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EABB0324BBF97A006F0C08 /* Clipping.swift */; };
 		A33C165924B6C6900051331E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33C165824B6C6900051331E /* ContentView.swift */; };
 		A33C165D24B6CBC70051331E /* Kindle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FBF1CD24257A48008176A1 /* Kindle.swift */; };
 		A33C166024B6EF420051331E /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33C165F24B6EF420051331E /* ActivityView.swift */; };
@@ -32,7 +34,6 @@
 		A3401A2F24B6627300961F3F /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3449A0524B02F510083A2A0 /* Database.swift */; };
 		A3401A3024B6627300961F3F /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = A384023424738DC60073B4D1 /* Store.swift */; };
 		A3401A3124B6627300961F3F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C44E40246B1354009AB4D0 /* Extensions.swift */; };
-		A3401A3A24B662FF00961F3F /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = A3401A3924B662FF00961F3F /* URLImage */; };
 		A3406FD42474AD8900B92004 /* ClippingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3406FD32474AD8900B92004 /* ClippingView.swift */; };
 		A3449A0624B02F510083A2A0 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3449A0524B02F510083A2A0 /* Database.swift */; };
 		A34A537D242477DA005B280E /* Detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34A537C242477DA005B280E /* Detail.swift */; };
@@ -50,7 +51,6 @@
 		A3B9C385242A74710033EC88 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B9C384242A74710033EC88 /* List.swift */; };
 		A3B9C388242AF1370033EC88 /* MultiLineText.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B9C387242AF1370033EC88 /* MultiLineText.swift */; };
 		A3BFE24B24AA9CDA001E0126 /* TouchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3BFE24A24AA9CDA001E0126 /* TouchBar.swift */; };
-		A3BFE24E24AABB93001E0126 /* URLImage in Frameworks */ = {isa = PBXBuildFile; productRef = A3BFE24D24AABB93001E0126 /* URLImage */; };
 		A3C44E41246B1354009AB4D0 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C44E40246B1354009AB4D0 /* Extensions.swift */; };
 		A3D4203F24B8D06700AFBBE9 /* Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34A537824246F51005B280E /* Row.swift */; };
 		A3D4204024B8D06900AFBBE9 /* Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = A34A537824246F51005B280E /* Row.swift */; };
@@ -58,10 +58,11 @@
 		A3D4204724B8D2FA00AFBBE9 /* ClippingText.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D4204324B8D2A200AFBBE9 /* ClippingText.swift */; };
 		A3EABB0024BBC94E006F0C08 /* Book.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A38A00C424874152009B141F /* Book.xcdatamodeld */; };
 		A3EABB0124BBC950006F0C08 /* Book.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A38A00C424874152009B141F /* Book.xcdatamodeld */; };
-		A3EABB0824BBF97B006F0C08 /* Clipping.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EABB0324BBF97A006F0C08 /* Clipping.swift */; };
 		A3EABB0924BBF97B006F0C08 /* Clipping.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EABB0324BBF97A006F0C08 /* Clipping.swift */; };
 		A3EABB0A24BBF97B006F0C08 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EABB0424BBF97A006F0C08 /* Book.swift */; };
 		A3EABB0B24BBF97B006F0C08 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EABB0424BBF97A006F0C08 /* Book.swift */; };
+		A3EBF9C524C8D39400E24CEC /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EBF9C424C8D39400E24CEC /* Library.swift */; };
+		A3EBF9C724C95DEE00E24CEC /* Tabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3EBF9C624C95DEE00E24CEC /* Tabs.swift */; };
 		A3FBF1CE24257A48008176A1 /* Kindle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FBF1CD24257A48008176A1 /* Kindle.swift */; };
 /* End PBXBuildFile section */
 
@@ -107,9 +108,10 @@
 		A3C44E40246B1354009AB4D0 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		A3D4204324B8D2A200AFBBE9 /* ClippingText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClippingText.swift; sourceTree = "<group>"; };
 		A3DB9A1D24A98EA900B523F3 /* Preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preview.swift; sourceTree = "<group>"; };
-		A3EABAFE24BA5A60006F0C08 /* ClippingForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClippingForm.swift; sourceTree = "<group>"; };
 		A3EABB0324BBF97A006F0C08 /* Clipping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clipping.swift; sourceTree = "<group>"; };
 		A3EABB0424BBF97A006F0C08 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
+		A3EBF9C424C8D39400E24CEC /* Library.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Library.swift; path = iOSKindling/Library.swift; sourceTree = SOURCE_ROOT; };
+		A3EBF9C624C95DEE00E24CEC /* Tabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tabs.swift; sourceTree = "<group>"; };
 		A3FBF1CD24257A48008176A1 /* Kindle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kindle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -119,7 +121,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A324A56E24BD0F28009B78A1 /* TextView in Frameworks */,
-				A3401A3A24B662FF00961F3F /* URLImage in Frameworks */,
+				A3304B0324C6A0EC00F5B835 /* FetchImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -127,7 +129,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A3BFE24E24AABB93001E0126 /* URLImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,6 +151,7 @@
 			children = (
 				A33C165F24B6EF420051331E /* ActivityView.swift */,
 				A3ABD23C24B95C8700F7A782 /* iOSExtensions.swift */,
+				A3EBF9C624C95DEE00E24CEC /* Tabs.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -157,6 +159,7 @@
 		A33C165E24B6EF290051331E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A3EBF9C424C8D39400E24CEC /* Library.swift */,
 				A324A56624BD07CE009B78A1 /* List.swift */,
 				A324A56424BD07CE009B78A1 /* Detail.swift */,
 				A324A56524BD07CE009B78A1 /* ClippingView.swift */,
@@ -208,7 +211,6 @@
 				A3BFE24724AA8A5E001E0126 /* BookCover.swift */,
 				A34A537824246F51005B280E /* Row.swift */,
 				A3D4204324B8D2A200AFBBE9 /* ClippingText.swift */,
-				A3EABAFE24BA5A60006F0C08 /* ClippingForm.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -283,8 +285,8 @@
 		A3EABB0E24BBFA7F006F0C08 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				A3EABB0424BBF97A006F0C08 /* Book.swift */,
 				A3EABB0324BBF97A006F0C08 /* Clipping.swift */,
+				A3EABB0424BBF97A006F0C08 /* Book.swift */,
 				A38A00C424874152009B141F /* Book.xcdatamodeld */,
 			);
 			path = CoreData;
@@ -314,8 +316,8 @@
 			);
 			name = iOSKindling;
 			packageProductDependencies = (
-				A3401A3924B662FF00961F3F /* URLImage */,
 				A324A56D24BD0F28009B78A1 /* TextView */,
+				A3304B0224C6A0EC00F5B835 /* FetchImage */,
 			);
 			productName = iOSKindling;
 			productReference = A3401A1824B660E200961F3F /* Kindling.app */;
@@ -335,7 +337,6 @@
 			);
 			name = MacKindling;
 			packageProductDependencies = (
-				A3BFE24D24AABB93001E0126 /* URLImage */,
 			);
 			productName = Kindling;
 			productReference = A372F9A024232837000722F3 /* MacKindling.app */;
@@ -369,8 +370,8 @@
 			);
 			mainGroup = A372F99724232837000722F3;
 			packageReferences = (
-				A3BDDC6924A3F7350032F9DB /* XCRemoteSwiftPackageReference "url-image" */,
 				A324A56C24BD0F28009B78A1 /* XCRemoteSwiftPackageReference "TextView" */,
+				A3304B0124C6A0EC00F5B835 /* XCRemoteSwiftPackageReference "FetchImage" */,
 			);
 			productRefGroup = A372F9A124232837000722F3 /* Products */;
 			projectDirPath = "";
@@ -433,6 +434,8 @@
 				A3401A3124B6627300961F3F /* Extensions.swift in Sources */,
 				A305AC8424B84C2600B89C0F /* Bridge.swift in Sources */,
 				A33C165D24B6CBC70051331E /* Kindle.swift in Sources */,
+				A3EBF9C524C8D39400E24CEC /* Library.swift in Sources */,
+				A3EBF9C724C95DEE00E24CEC /* Tabs.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -459,11 +462,11 @@
 				A305AC7E24B8459A00B89C0F /* MacExtensions.swift in Sources */,
 				A3B9C388242AF1370033EC88 /* MultiLineText.swift in Sources */,
 				A34A537D242477DA005B280E /* Detail.swift in Sources */,
-				A3EABB0824BBF97B006F0C08 /* Clipping.swift in Sources */,
 				A3EABB0124BBC950006F0C08 /* Book.xcdatamodeld in Sources */,
 				A3449A0624B02F510083A2A0 /* Database.swift in Sources */,
 				A3D4203F24B8D06700AFBBE9 /* Row.swift in Sources */,
 				A3406FD42474AD8900B92004 /* ClippingView.swift in Sources */,
+				A3304B0424C6AABB00F5B835 /* Clipping.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -744,12 +747,12 @@
 				kind = branch;
 			};
 		};
-		A3BDDC6924A3F7350032F9DB /* XCRemoteSwiftPackageReference "url-image" */ = {
+		A3304B0124C6A0EC00F5B835 /* XCRemoteSwiftPackageReference "FetchImage" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/dmytro-anokhin/url-image.git";
+			repositoryURL = "https://github.com/kean/FetchImage";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.9.15;
+				branch = master;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -760,15 +763,10 @@
 			package = A324A56C24BD0F28009B78A1 /* XCRemoteSwiftPackageReference "TextView" */;
 			productName = TextView;
 		};
-		A3401A3924B662FF00961F3F /* URLImage */ = {
+		A3304B0224C6A0EC00F5B835 /* FetchImage */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = A3BDDC6924A3F7350032F9DB /* XCRemoteSwiftPackageReference "url-image" */;
-			productName = URLImage;
-		};
-		A3BFE24D24AABB93001E0126 /* URLImage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A3BDDC6924A3F7350032F9DB /* XCRemoteSwiftPackageReference "url-image" */;
-			productName = URLImage;
+			package = A3304B0124C6A0EC00F5B835 /* XCRemoteSwiftPackageReference "FetchImage" */;
+			productName = FetchImage;
 		};
 /* End XCSwiftPackageProductDependency section */
 

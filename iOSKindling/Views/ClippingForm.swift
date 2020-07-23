@@ -19,14 +19,14 @@ struct ClippingForm: View {
 	var type: FormType
 
 	@Binding var sheetBinding: Bool
-	
+
 	@State var author = ""
 	@State var title = ""
 	@State var text: String = ""
-	
+
 	@State var page: Int16 = 0
 	@State var stringPage = ""
-	
+
 	@State var isEditing: Bool = false
 
 	var clipping: Clipping?
@@ -36,44 +36,48 @@ struct ClippingForm: View {
 	}
 
 	var body: some View {
-		Form {
-			Section(header:
-				HStack {
-					Text(self.type != .edit ? "Add Highlight" : "Edit Highlight")
-						.font(.largeTitle)
-						.foregroundColor(.white)
-						.fontWeight(.bold)
-						.padding(.top)
-					Spacer()
-					Button("Save", action: self.saveClipping)
-						.disabled(!self.isValid)
-						.font(.body)
+		NavigationView {
+//			HStack {
+//				Text(self.type != .edit ? "Add Highlight" : "Edit Highlight")
+//					.font(.largeTitle)
+//					.foregroundColor(.white)
+//					.fontWeight(.bold)
+//					.padding(.top)
+//				Spacer()
+//				Button("Save", action: self.saveClipping)
+//					.disabled(!self.isValid)
+//					.font(.body)
+//			}
+			Form {
+				Section(header: Text("BOOK")) {
+					TextField("Title", text: self.$title)
+						.disabled(self.type != .new)
+					TextField("Author", text: self.$author)
+						.disabled(self.type != .new)
 				}
 
-			) { EmptyView() }
-
-			Section(header: Text("BOOK")) {
-				TextField("Title", text: self.$title)
-					.disabled(self.type != .new)
-				TextField("Author", text: self.$author)
-					.disabled(self.type != .new)
+				Section(header: Text("HIGHLIGHT")) {
+					TextField("Page", text: self.$stringPage)
+						.keyboardType(.numberPad)
+					TextView(text: self.$text, isEditing: self.$isEditing, placeholder: "Highlight")
+						.padding(.leading, -5)
+						.frame(height: 200)
+				}
 			}
-
-			Section(header: Text("HIGHLIGHT")) {
-				TextField("Page", text: self.$stringPage)
-					.keyboardType(.numberPad)
-				TextView(text: self.$text, isEditing: self.$isEditing, placeholder: "Highlight")
-					.padding(.leading, -5)
-					.frame(height: 200)
+			.onAppear {
+				self.stringPage = self.page > 0 ? String(self.page) : ""
+				if let clipping = self.clipping {
+					self.author = clipping.book.author
+					self.text = clipping.text
+					self.title = clipping.book.title
+				}
 			}
-		}
-		.onAppear {
-			self.stringPage = self.page > 0 ? String(self.page) : ""
-			if let clipping = self.clipping {
-				self.author = clipping.book.author
-				self.text = clipping.text
-				self.title = clipping.book.title
-			}
+			.navigationBarTitle(Text("New Highlight"))
+			.navigationBarItems(leading: Button("Cancel") {
+				self.sheetBinding.toggle()
+			}, trailing: Button("Done") {
+				self.saveClipping()
+			}.disabled(!self.isValid))
 		}
 	}
 

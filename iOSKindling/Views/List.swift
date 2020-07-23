@@ -24,7 +24,6 @@ struct BookList: View {
 			NSSortDescriptor(keyPath: \Book.author, ascending: true),
 			NSSortDescriptor(keyPath: \Book.title, ascending: false)
 		]
-		
 		if query.count > 0 {
 			req.predicate = NSPredicate(format: "title CONTAINS[c] %@", query as CVarArg)
 		}
@@ -35,10 +34,8 @@ struct BookList: View {
 		let books = req.wrappedValue
 		return List {
 			ForEach(books, id: \.id) { book in
-				Group {
-					NavigationLink(destination: BookDetail(book: book)) {
-						BookRow(book: book, placeholderImage: PreviewContext.image)
-					}
+				NavigationLink(destination: BookDetail(book: book)) {
+					BookRow(book: book)
 				}
 			}
 			.onDelete { indices in

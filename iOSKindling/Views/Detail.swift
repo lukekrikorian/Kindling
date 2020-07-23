@@ -18,39 +18,35 @@ struct BookDetail: View {
 	@Environment(\.managedObjectContext) var context
 	@EnvironmentObject var store: Store
 	@ObservedObject var book: Book
-
+	var req: FetchRequest<Clipping>
 	@State private var sheetToggle = false
-	
 	@State private var sortToggle = false
 	@State private var sort: ClippingSort = .page
 
+	init(book: Book) {
+		UITableView.appearance().separatorStyle = .none
+		self.book = book
+		self.req = FetchRequest(entity: Clipping.entity(), sortDescriptors: [
+			NSSortDescriptor(keyPath: \Clipping.page, ascending: true)
+		], predicate: NSPredicate(format: "book.title = %@", book.title))
+	}
+
 	var body: some View {
-		let clippings = self.book.filteredClippings(by: self.store.searchQuery).sorted(by: {
-			switch self.sort {
-				case .date:
-					return $0.date < $1.date
-				case .page:
-					return $0.page < $1.page
-			}
-		})
-		return ScrollView {
-			HStack {
-				Spacer()
-				VStack(alignment: .leading) {
-					BookHeader(book: book)
-					ForEach(Array(clippings), id: \.self.id) { clipping in
-						ClippingView(clipping: clipping)
-					}
+		List {
+			Group {
+				BookHeader(book: book)
+				ForEach(req.wrappedValue, id: \.self.id) { clipping in
+					ClippingView(clipping: clipping)
 				}
-				Spacer()
 			}
+			.listRowInsets(EdgeInsets())
+			.padding(5)
 		}
 		.navigationBarTitle(Text(""), displayMode: .inline)
 		.navigationBarItems(trailing: HStack {
 			sortButton
 			addButton
-		}
-		)
+		})
 		.actionSheet(isPresented: self.$sortToggle) {
 			ActionSheet(title: Text("Sort Highlights"), buttons: [
 				.default(Text("By Date Added")) { self.sort = .date },
@@ -62,7 +58,6 @@ struct BookDetail: View {
 			ClippingForm(type: .newInBook, sheetBinding: self.$sheetToggle, author: self.book.author, title: self.book.title)
 				.environment(\.managedObjectContext, self.context)
 		}
-		.frame(minWidth: 300)
 	}
 
 	var sortButton: some View {

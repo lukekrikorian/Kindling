@@ -11,29 +11,16 @@ import SwiftUI
 
 struct ContentView: View {
 	@Environment(\.managedObjectContext) var context
-	@EnvironmentObject var store: Store
-
-	@State private var sheetToggle = false
 
 	var body: some View {
-		NavigationView {
-			BookList(query: self.store.searchQuery)
-				.navigationBarTitle("Library")
-				.navigationBarItems(trailing: addButton)
-		}
-		.sheet(isPresented: self.$sheetToggle) {
-			ClippingForm(type: .new, sheetBinding: self.$sheetToggle)
-				.environment(\.managedObjectContext, self.context)
+		Tabs {
+			Library()
+				.tab(title: "Library", image: "book")
+			Text("Secondary View")
+				.tab(title: "Search", image: "doc.text.magnifyingglass")
 		}
 		.onReceive(NotificationCenter.default.publisher(for: .deviceShake)) { _ in
 			self.context.undo()
-		}
-	}
-
-	var addButton: some View {
-		Button(action: { self.sheetToggle = true }) {
-			Image(uiImage: UIImage(systemName: "plus.circle.fill")!)
-				.imageScale(.large)
 		}
 	}
 }
